@@ -700,6 +700,10 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
 - (void)formatToMp4:(NSString*)mediaType
 videoDestinationURL:(NSURL*)videoDestinationURL
         videoRefURL:(NSURL*)videoRefURL {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:videoRefURL.path]) {
+        self.callback(@[@{@"error": "%@ not exist", videoRefURL.path}]);
+        return
+    }
     if ([[self.options objectForKey:@"formatToMp4"] boolValue] == YES && ![mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         NSURL *parentURL = [videoDestinationURL URLByDeletingLastPathComponent];
         NSString *path = [[parentURL.path stringByAppendingString:@"/"] stringByAppendingString:[[NSUUID UUID] UUIDString]];
@@ -726,6 +730,10 @@ videoDestinationURL:(NSURL*)videoDestinationURL
 - (void)callbackIfNoFormatToMp4:(NSString*)mediaType
             videoDestinationURL:(NSURL*)videoDestinationURL
                     videoRefURL:(NSURL*)videoRefURL {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:videoRefURL.path]) {
+        self.callback(@[@{@"error": "%@ not exist", videoRefURL.path}]);
+        return
+    }
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) { // PHOTOS
         self.callback(@[self.response]);
     } else {
