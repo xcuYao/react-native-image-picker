@@ -703,7 +703,7 @@ videoDestinationURL:(NSURL*)videoDestinationURL
     if (![[NSFileManager defaultManager] fileExistsAtPath:videoRefURL.path]) {
         NSString *msg = [[NSString alloc] initWithFormat:@"%@ not exist", videoRefURL.path];
         self.callback(@[@{@"error": msg}]);
-        return
+        return;
     }
     if ([[self.options objectForKey:@"formatToMp4"] boolValue] == YES && ![mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         NSURL *parentURL = [videoDestinationURL URLByDeletingLastPathComponent];
@@ -734,7 +734,7 @@ videoDestinationURL:(NSURL*)videoDestinationURL
     if (![[NSFileManager defaultManager] fileExistsAtPath:videoRefURL.path]) {
         NSString *msg = [[NSString alloc] initWithFormat:@"%@ not exist", videoRefURL.path];
         self.callback(@[@{@"error": msg}]);
-        return
+        return;
     }
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) { // PHOTOS
         self.callback(@[self.response]);
