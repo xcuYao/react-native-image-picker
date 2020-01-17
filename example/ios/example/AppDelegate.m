@@ -12,6 +12,16 @@
 
 @implementation AppDelegate
 
+// fix error
+//node_modules/react-native/React/Base/RCTModuleMethod.mm
+//static BOOL RCTParseUnused(const char **input)
+//{
+//  return RCTReadString(input, "__attribute__((unused))") ||
+//           RCTReadString(input, "__attribute__((__unused__))") ||
+//           RCTReadString(input, "__unused");
+//}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
@@ -20,7 +30,7 @@
   
 //  jsCodeLocation = URL(string: "http://localhost:8081/index.bundle?platform=ios")!
 //  jsCodeLocation = [[NSURL alloc] initWithString:@"http://localhost:8081/index.bundle?platform=ios"];
-  jsCodeLocation = [[NSURL alloc] initWithString:@"http://192.168.1.101:8081/index.bundle?platform=ios"];
+  jsCodeLocation = [[NSURL alloc] initWithString:@"http://10.180.50.196:8081/index.bundle?platform=ios"];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Example"

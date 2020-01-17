@@ -700,7 +700,7 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
 - (void)formatToMp4:(NSString*)mediaType
 videoDestinationURL:(NSURL*)videoDestinationURL
         videoRefURL:(NSURL*)videoRefURL {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:videoRefURL.path]) {
+    if (videoRefURL != nil && [PHAsset fetchAssetsWithALAssetURLs:@[videoRefURL] options:nil].count == 0){
         NSString *msg = [[NSString alloc] initWithFormat:@"%@ not exist", videoRefURL.path];
         self.callback(@[@{@"error": msg}]);
         return;
@@ -731,7 +731,7 @@ videoDestinationURL:(NSURL*)videoDestinationURL
 - (void)callbackIfNoFormatToMp4:(NSString*)mediaType
             videoDestinationURL:(NSURL*)videoDestinationURL
                     videoRefURL:(NSURL*)videoRefURL {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:videoRefURL.path]) {
+    if (videoRefURL != nil && [PHAsset fetchAssetsWithALAssetURLs:@[videoRefURL] options:nil].count == 0){
         NSString *msg = [[NSString alloc] initWithFormat:@"%@ not exist", videoRefURL.path];
         self.callback(@[@{@"error": msg}]);
         return;
